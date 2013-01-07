@@ -1,0 +1,226 @@
+.cycle {
+  position: relative;
+  z-index: 1;
+  line-height: 1;
+}
+.cycle .cycle-inner {
+  overflow: hidden;
+  width: 100%;
+  position: relative;
+  z-index: 2;
+}
+.cycle .item {
+  display: none;
+  position: relative;
+  z-index: 3;
+}
+.cycle .item > img {
+  display: block;
+  line-height: 1;
+}
+.cycle .active,
+.cycle .next,
+.cycle .prev {
+  display: block;
+}
+.cycle .active {
+  top: 0;
+  left: 0;
+  z-index: 4;
+}
+.cycle.xfade .cycle-inner {
+  height: 100%;
+}
+.cycle.xfade .item {
+  -webkit-transition: 0.5s ease-in opacity;
+  -moz-transition: 0.5s ease-in opacity;
+  -o-transition: 0.5s ease-in opacity;
+  transition: 0.5s ease-in opacity;
+  position: absolute;
+  width: 100%;
+  opacity: 0;
+}
+.cycle.xfade .go {
+  opacity: 1;
+}
+.cycle.xfade .active {
+  opacity: 1;
+}
+.cycle.xfade .active.go {
+  opacity: 0;
+}
+.cycle.slide .item {
+  -webkit-transition: 0.5s ease-in-out left;
+  -moz-transition: 0.5s ease-in-out left;
+  -o-transition: 0.5s ease-in-out left;
+  transition: 0.5s ease-in-out left;
+}
+.cycle.slide.xfade .item {
+  -webkit-transition: 0.5s ease-in-out left, 0.5s ease-in opacity;
+  -moz-transition: 0.5s ease-in-out left, 0.5s ease-in opacity;
+  -o-transition: 0.5s ease-in-out left, 0.5s ease-in opacity;
+  transition: 0.5s ease-in-out left, 0.5s ease-in opacity;
+}
+.cycle.slide .next,
+.cycle.slide .prev {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+.cycle.slide .next {
+  left: 100%;
+}
+.cycle.slide .prev {
+  left: -100%;
+}
+.cycle.slide .active.prev,
+.cycle.slide .active.next {
+  position: relative;
+  left: 0;
+}
+.cycle.slide .go {
+  left: 0;
+}
+.cycle.slide .go.active {
+  left: -100%;
+}
+.cycle.slide .go.active.prev {
+  left: 100%;
+}
+.cycle.slide.right .next {
+  left: -100%;
+}
+.cycle.slide.right .prev {
+  left: 100%;
+}
+.cycle.slide.right .go {
+  left: 0;
+}
+.cycle.slide.right .go.active {
+  left: 100%;
+}
+.cycle.slide.right .go.active.prev {
+  left: -100%;
+}
+.cycle.slide.down .item {
+  -webkit-transition: 0.5s ease-in-out top;
+  -moz-transition: 0.5s ease-in-out top;
+  -o-transition: 0.5s ease-in-out top;
+  transition: 0.5s ease-in-out top;
+}
+.cycle.slide.down.xfade .item {
+  -webkit-transition: 0.5s ease-in-out top, 0.5s ease-in opacity;
+  -moz-transition: 0.5s ease-in-out top, 0.5s ease-in opacity;
+  -o-transition: 0.5s ease-in-out top, 0.5s ease-in opacity;
+  transition: 0.5s ease-in-out top, 0.5s ease-in opacity;
+}
+.cycle.slide.down .cycle-inner {
+  height: 100%;
+}
+.cycle.slide.down .next,
+.cycle.slide.down .prev {
+  left: 0;
+}
+.cycle.slide.down .next {
+  top: -100%;
+}
+.cycle.slide.down .prev {
+  top: 100%;
+}
+.cycle.slide.down .go {
+  top: 0;
+}
+.cycle.slide.down .go.active {
+  top: 100%;
+  left: 0;
+}
+.cycle.slide.down .go.active.prev {
+  top: -100%;
+}
+.cycle.slide.up .item {
+  -webkit-transition: 0.5s ease-in-out top;
+  -moz-transition: 0.5s ease-in-out top;
+  -o-transition: 0.5s ease-in-out top;
+  transition: 0.5s ease-in-out top;
+}
+.cycle.slide.up.xfade .item {
+  -webkit-transition: 0.5s ease-in-out top, 0.5s ease-in opacity;
+  -moz-transition: 0.5s ease-in-out top, 0.5s ease-in opacity;
+  -o-transition: 0.5s ease-in-out top, 0.5s ease-in opacity;
+  transition: 0.5s ease-in-out top, 0.5s ease-in opacity;
+}
+.cycle.slide.up .cycle-inner {
+  height: 100%;
+}
+.cycle.slide.up .next,
+.cycle.slide.up .prev {
+  left: 0;
+}
+.cycle.slide.up .next {
+  top: 100%;
+}
+.cycle.slide.up .prev {
+  top: -100%;
+}
+.cycle.slide.up .go {
+  top: 0;
+}
+.cycle.slide.up .go.active {
+  top: -100%;
+  left: 0;
+}
+.cycle.slide.up .go.active.prev {
+  top: 100%;
+}
+.cycle-control {
+  position: absolute;
+  z-index: 5;
+  top: 50%;
+  left: -20px;
+  width: 40px;
+  height: 40px;
+  margin-top: -20px;
+  font-size: 30px;
+  font-weight: 100;
+  line-height: 40px;
+  color: #ffffff;
+  text-align: center;
+  cursor: pointer;
+  background: #333333;
+  border: 3px solid #ffffff;
+  -webkit-border-radius: 23px;
+  -moz-border-radius: 23px;
+  border-radius: 23px;
+  opacity: 0.5;
+  filter: alpha(opacity=50);
+  -webkit-transition: none;
+  -moz-transition: none;
+  -o-transition: none;
+  transition: none;
+}
+.cycle-control.right {
+  left: auto;
+  right: -20px;
+}
+.cycle-control:hover {
+  color: #ffffff;
+  text-decoration: none;
+  text-shadow: none;
+  opacity: 0.9;
+  filter: alpha(opacity=90);
+}
+.cycle-nav {
+  text-align: center;
+  padding: 5px 0;
+}
+.cycle-nav > li {
+  display: inline-block;
+  font-size: 24px;
+}
+.cycle-nav > li.active {
+  display: inline-block;
+}
+.cycle-nav > li.active a {
+  color: #000000;
+}

@@ -1,0 +1,297 @@
+// Transition mixin
+.transition(@transitionA, @transitionB: X, ...) {
+  @props: ~`"@{arguments}".replace(/[\[\]]|\,\sX/g, '')`;
+  -webkit-transition: @props;
+  -moz-transition: @props;
+  -o-transition: @props;
+  transition: @props;
+}
+
+// Opacity mixin
+.opacity(@opacity) {
+  opacity: @opacity / 100;
+  filter: ~"alpha(opacity=@{opacity})";
+}
+
+// Border Radius mixin
+.border-radius(@radius) {
+  -webkit-border-radius: @radius;
+  -moz-border-radius: @radius;
+  border-radius: @radius;
+}
+
+@black:                 #000;
+@grayDark:              #333;
+@white:                 #fff;
+@blue:                  #049cdb;
+
+//
+// Cycle
+// --------------------------------------------------
+
+.cycle {
+  position: relative;
+  z-index: 1;
+  line-height: 1;
+  .cycle-inner {
+    overflow: hidden;
+    width: 100%;
+    position: relative;
+    z-index: 2;
+  }
+}
+
+.cycle {
+
+  .item {
+    display: none;
+    position: relative;
+    z-index: 3;
+  }
+
+  // Account for jankitude on images
+  .item > img {
+    display: block;
+    line-height: 1;
+  }
+
+  .active,
+  .next,
+  .prev { display: block; }
+
+  .active {
+    top:0;
+    left:0;
+    z-index: 4;
+  }
+
+  &.xfade {
+
+    .cycle-inner {
+      height: 100%;
+    }
+
+    .item {
+      .transition(.5s ease-in opacity);
+      position: absolute;
+      width: 100%;
+      opacity: 0;
+    }
+
+    .go {
+      opacity: 1;
+    }
+
+    .active {
+      opacity: 1;
+      &.go {
+        opacity: 0;
+      }
+    }
+
+  }
+
+  // slide animation
+  &.slide {
+
+    .item {
+      .transition(.5s ease-in-out left);
+    }
+
+    &.xfade .item {
+      .transition(.5s ease-in-out left, .5s ease-in opacity);
+    }
+
+    // next/prev slide
+    .next,
+    .prev {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+    }
+
+    // slide left (default)
+    .next {
+      left:100%;
+    }
+    .prev {
+      left:-100%;
+    }
+
+    .active.prev,
+    .active.next {
+      position: relative;
+      left:0;
+    }
+
+    .go {
+      left:0;
+      &.active {
+        left:-100%;
+        &.prev {
+          left:100%;
+        }
+      }
+    }
+
+    // slide right
+    &.right {
+      // next slide
+      .next {
+        left:-100%;
+      }
+      // prev slide
+      .prev {
+        left:100%;
+      }
+
+      .go {
+        left:0;
+        &.active {
+          left:100%;
+          &.prev {
+            left:-100%;
+          }
+        }
+      }
+
+    }
+
+    // slide down
+    &.down {
+
+      .item {
+        .transition(.5s ease-in-out top);
+      }
+
+      &.xfade .item {
+        .transition(.5s ease-in-out top, .5s ease-in opacity);
+      }
+
+      .cycle-inner {
+        height: 100%;
+      }
+
+      .next,
+      .prev {
+        left:0;
+      }
+      // next slide
+      .next {
+        top:-100%;
+      }
+      // prev slide
+      .prev {
+        top:100%;
+      }
+      .go {
+        top:0;
+        &.active {
+          top:100%;
+          left:0;
+          &.prev {
+            top:-100%;
+          }
+        }
+      }
+    }
+
+    // slide up
+    &.up {
+
+      .item {
+        .transition(.5s ease-in-out top);
+      }
+
+      &.xfade .item {
+        .transition(.5s ease-in-out top, .5s ease-in opacity);
+      }
+
+      .cycle-inner {
+        height: 100%;
+      }
+
+      .next,
+      .prev {
+        left:0;
+      }
+      // next slide
+      .next {
+        top:100%;
+      }
+      // prev slide
+      .prev {
+        top:-100%;
+      }
+      .go {
+        top:0;
+        &.active {
+          top:-100%;
+          left:0;
+          &.prev {
+            top:100%;
+          }
+        }
+      }
+    }
+
+  }
+
+}
+
+// Left/right controls for nav
+// ---------------------------
+
+.cycle-control {
+  position: absolute;
+  z-index: 5;
+  top: 50%;
+  left: -20px;
+  width: 40px;
+  height: 40px;
+  margin-top: -20px;
+  font-size: 30px;
+  font-weight: 100;
+  line-height: 40px;
+  color: @white;
+  text-align: center;
+  cursor:pointer;
+  background: @grayDark;
+  border: 3px solid @white;
+  .border-radius(23px);
+  .opacity(50);
+
+  // ensure no transition
+  // interferes with other transitions
+  .transition(none);
+
+  // right control
+  &.right {
+    left: auto;
+    right: -20px;
+  }
+
+  // hover state
+  &:hover {
+    color: @white;
+    text-decoration: none;
+    text-shadow:none;
+    .opacity(90);
+  }
+}
+
+.cycle-nav {
+  text-align: center;
+  padding:5px 0;
+  > li {
+    display: inline-block;
+    font-size: 24px;
+    &.active {
+      display: inline-block;
+      a {
+        color: darken(@blue, 50%);
+      }
+    }
+  }
+}

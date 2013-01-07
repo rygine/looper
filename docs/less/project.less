@@ -1,0 +1,85 @@
+.jumbotron {
+  padding: 40px 0;
+  background: url(images/micro_carbon.png) repeat 0 0;
+  text-align: center;
+  color: @white;
+  h1 {
+    font-size: 80px;
+    line-height: 1;
+    margin:0 0 20px 0;
+  }
+  p {
+    font-size: 20px;
+    margin-bottom: 20px;
+  }
+  .btn {
+    padding: 14px 24px;
+    font-size: 24px;
+  }
+  ul {
+    margin:20px 0 0 0;
+    list-style-type: none;
+    color:@gray;
+    li {
+      display: inline;
+      padding: 0 20px;
+    }
+    a {
+      color:@grayLight;
+    }
+  }
+}
+
+aside .nav-list {
+  margin-top: 20px;
+  a {
+    [class*="icon-"] {
+      float:right;
+      font-size: 16px;
+      color:fade(@black, 25%);
+      margin-right: -2px;
+      width:auto;
+    }
+    &:hover {
+      [class*="icon-"] {
+        color:fade(@black, 50%);
+      }
+    }
+  }
+  .active > a {
+    [class*="icon-"] {
+      color:@white;
+    }
+    &:hover {
+      [class*="icon-"] {
+        color:@white;
+      }
+    }
+  }
+  &.affix {
+    top:0;
+    .makeSpan(3);
+    @media (min-width: 1200px) {
+      .makeSpan(3, 70, 30);
+    }
+    @media (min-width: 768px) and (max-width: 979px) {
+      .makeSpan(3, 42);
+    }
+    @media (max-width: 767px) {
+      width:auto;
+    }
+  }
+}
+
+#content section {
+  margin-bottom: 40px;
+}
+
+.table .table th:first-child {
+  width:30%;
+}
+
+.cycle {
+  width:320px;
+  height:240px;
+}
