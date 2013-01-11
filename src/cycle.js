@@ -267,6 +267,11 @@
 
                     // complete cycle after transition
                     this.$element.one(cssTransitionSupport, function() {
+
+                        // weird CSS transition when cycle element is initially hidden
+                        // make cause this event to first twice with invalid $active
+                        // element on first run
+                        if (!$active.length) return;
                         complete.call(that, $active, $next, direction);
                     });
 
