@@ -1,0 +1,30 @@
+{
+	"name": "Cycle",
+	"version": "1.0.2",
+	"title": "Cycle.js",
+	"author": {
+		"name": "Ry Racherbaumer",
+		"email": "ry@rygine.com",
+		"url": "rygine.com"
+	},
+	"licenses": [{
+		"type": "Apache-2.0",
+		"url": "http://opensource.org/licenses/Apache-2.0"
+	}],
+	"dependencies": [{
+		"jquery": "~1.8"
+	}],
+	"description": "An intuitive carousel solution. No coding required.",
+	"keywords": [
+		"cycle",
+		"carousel",
+		"slideshow",
+		"rotate",
+		"slide"
+	],
+	"homepage": "https://github.com/rygine/cycle",
+	"documentation": "http://rygine.com/projects/cycle.js/docs",
+	"demo": "http://rygine.com/projects/cycle.js/docs",
+	"bugs": "https://github.com/rygine/cycle/issues"
+
+}

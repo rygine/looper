@@ -1,5 +1,5 @@
 /** ===========================================================================
- * Cycle.js | a jQuery plugin - v1.0.1
+ * Cycle.js | a jQuery plugin - v1.0.2
  * Copyright 2013 Ry Racherbaumer
  * http://rygine.com/projects/cycle.js
  *
@@ -140,10 +140,11 @@
         to: function(pos) {
             // zero-base the position
             --pos;
+
+            var // all items
+                $items = this.$element.find('.item'),
                 // active item
-            var $active = this.$element.find('.item.active'),
-                // all items
-                $items = $active.parent().children(),
+                $active = $items.filter('.active'),
                 // active position
                 activePos = $items.index($active),
                 // self-reference
@@ -278,7 +279,7 @@
                     // ensure that cycle is completed
                     setTimeout(function() {
                         complete.call(that, $active, $next, direction);
-                    }, this.options.transitionSpeed);
+                    }, this.options.speed);
 
                 // no css transition support, use jQuery animation fallback
                 } else {
@@ -320,8 +321,8 @@
                     $next.addClass(direction);
 
                     // do animations
-                    $active.animate(active, this.options.transitionSpeed);
-                    $next.animate(next, this.options.transitionSpeed, function(){
+                    $active.animate(active, this.options.speed);
+                    $next.animate(next, this.options.speed, function(){
 
                         // complete cycle
                         complete.call(that, $active, $next, direction);
@@ -398,7 +399,7 @@
         // when to pause auto-cycle
         pause: 'hover',
         // css transition speed (must match css definition)
-        transitionSpeed: 500
+        speed: 500
     };
 
     // constructor
