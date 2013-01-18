@@ -1,7 +1,7 @@
 {
-	"name": "cyclejs",
+	"name": "cycle",
 	"title": "Cycle.js",
-	"version": "1.0.4",
+	"version": "1.0.5",
 	"description": "An intuitive, lightweight carousel solution. No coding required.",
 	"keywords": [
 		"cycle",
