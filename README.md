@@ -7,11 +7,17 @@ To get started, read the docs: http://rygine.com/projects/cycle.js/docs/
 
 Browser Compatibility
 --------------------
-* IE 8+ (7 may work, but is not tested)
+* IE 8+
 * Chrome
 * Firefox
 * Safari
 * Opera
+
+To Do
+--------------------
+
+* Test with IE7
+* Make unit tests
 
 Copyright and License
 ---------------------
