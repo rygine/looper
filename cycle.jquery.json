@@ -11,9 +11,9 @@
 		"type": "Apache-2.0",
 		"url": "http://opensource.org/licenses/Apache-2.0"
 	}],
-	"dependencies": [{
+	"dependencies": {
 		"jquery": "~1.8"
-	}],
+	},
 	"description": "An intuitive carousel solution. No coding required.",
 	"keywords": [
 		"cycle",
