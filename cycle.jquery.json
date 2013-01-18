@@ -11,7 +11,8 @@
 		"slide",
 		"slider",
 		"animation",
-		"data-api"
+		"data-api",
+		"fade"
 	],
 	"author": {
 		"name": "Ry Racherbaumer",
