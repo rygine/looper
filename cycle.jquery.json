@@ -20,7 +20,10 @@
 		"carousel",
 		"slideshow",
 		"rotate",
-		"slide"
+		"slide",
+		"slider",
+		"animation",
+		"data-api"
 	],
 	"homepage": "https://github.com/rygine/cycle",
 	"documentation": "http://rygine.com/projects/cycle.js/docs",
