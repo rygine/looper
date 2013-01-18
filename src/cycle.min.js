@@ -1,5 +1,5 @@
 /** ===========================================================================
- * Cycle.js | a jQuery plugin - v1.0.5
+ * Cycle.js | a jQuery plugin - v1.0.6
  * Copyright 2013 Ry Racherbaumer
  * http://rygine.com/projects/cycle.js
  *

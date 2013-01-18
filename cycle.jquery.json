@@ -1,7 +1,7 @@
 {
 	"name": "cycle",
 	"title": "Cycle.js",
-	"version": "1.0.5",
+	"version": "1.0.6",
 	"description": "An intuitive, lightweight carousel solution. No coding required.",
 	"keywords": [
 		"cycle",
@@ -27,7 +27,7 @@
 		"jquery": "~1.8"
 	},
 	"homepage": "https://github.com/rygine/cycle",
-	"documentation": "http://rygine.com/projects/cycle.js/docs",
+	"docs": "http://rygine.com/projects/cycle.js/docs",
 	"demo": "http://rygine.com/projects/cycle.js/docs",
 	"bugs": "https://github.com/rygine/cycle/issues"
 }
