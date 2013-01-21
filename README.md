@@ -16,6 +16,9 @@ Browser Compatibility
 To Do
 --------------------
 
+* ARIA support
+* Keyboard navigation
+* More advanced examples
 * Test with IE7
 * Make unit tests
 
