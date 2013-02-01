@@ -1,5 +1,5 @@
 /** ===========================================================================
- * Cycle.js | a jQuery plugin - v1.0.6
+ * Cycle.js | a jQuery plugin - v1.1.0
  * Copyright 2013 Ry Racherbaumer
  * http://rygine.com/projects/cycle.js
  *
@@ -51,6 +51,33 @@
         this.$element = $(element);
         this.options = options;
         this.cycling = false;
+
+        // self-reference
+        var self = this;
+
+        // setup ARIA accessibility
+        this.$element.attr('tabindex', 0)
+            // use keydown, keypress not reliable in IE
+            .keydown(function(e){
+                // handle key
+                switch (e.which) {
+                    // left arrow
+                    case 37:
+                        // go to previous item
+                        self.prev();
+                        break;
+                    // right arrow
+                    case 39:
+                        // go to next item
+                        self.next();
+                        break;
+                    // give control back to browser for other keys
+                    default: return;
+                }
+                // prevent browser default action
+                e.preventDefault();
+            })
+            .find('.item').attr('aria-hidden', true);
 
         // setup pause on hover
         this.options.pause === 'hover' && this.$element
@@ -210,8 +237,12 @@
                     this.cycling = false;
 
                     // update item classes
-                    active.removeClass('active go ' + direction);
-                    next.removeClass('go ' + direction).addClass('active');
+                    active.removeClass('active go ' + direction)
+                        // update ARIA state
+                        .attr('aria-hidden', true);
+                    next.removeClass('go ' + direction).addClass('active')
+                        // update ARIA state
+                        .removeAttr('aria-hidden');
 
                     // custom event
                     var e = $.Event('cycled', {

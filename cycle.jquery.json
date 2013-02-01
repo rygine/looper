@@ -1,7 +1,7 @@
 {
 	"name": "cycle",
 	"title": "Cycle.js",
-	"version": "1.0.6",
+	"version": "1.1.0",
 	"description": "An intuitive, lightweight carousel solution. No coding required.",
 	"keywords": [
 		"cycle",
@@ -12,7 +12,8 @@
 		"slider",
 		"animation",
 		"data-api",
-		"fade"
+		"fade",
+		"aria"
 	],
 	"author": {
 		"name": "Ry Racherbaumer",

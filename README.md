@@ -5,22 +5,41 @@ Cycle through your content without writing a single line of Javascript. To keep 
 
 To get started, read the docs: http://rygine.com/projects/cycle.js/docs/
 
-Browser Compatibility
+Key Features
 --------------------
+
+* No coding required
+* Fully accessible with ARIA attributes, tab focus and keyboard navigation
+* LESS support with configuration variables
+* Easily extensible through events
+
+Known Browser Compatibility
+--------------------
+
 * IE 8+
 * Chrome
 * Firefox
 * Safari
-* Opera
 
 To Do
 --------------------
 
-* ARIA support
-* Keyboard navigation
 * More advanced examples
 * Test with IE7
 * Make unit tests
+
+Release Notes
+--------------------
+
+1.1.0
+* Added ARIA support with keyboard navigation
+* Refactored cycle.less, now includes variables for easy configuration
+
+1.0.6
+* Minor fixes
+
+1.0.0
+* Initial release
 
 Copyright and License
 ---------------------
