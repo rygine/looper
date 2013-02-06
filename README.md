@@ -25,6 +25,7 @@ To Do
 --------------------
 
 * More advanced examples
+* Add SASS support
 * Test with Opera
 * Write unit tests
 
