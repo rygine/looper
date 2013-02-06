@@ -48,6 +48,7 @@
 
     // class definition
     var Cycle = function(element, options) {
+
         this.$element = $(element);
         this.options = options;
         this.cycling = false;
@@ -55,7 +56,7 @@
         // self-reference
         var self = this;
 
-        // setup ARIA accessibility
+        // setup keyboard accessibility
         this.$element.attr('tabindex', 0)
             // use keydown, keypress not reliable in IE
             .keydown(function(e){
@@ -77,6 +78,7 @@
                 // prevent browser default action
                 e.preventDefault();
             })
+            // ARIA
             .find('.item').attr('aria-hidden', true);
 
         // setup pause on hover

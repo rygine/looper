@@ -212,6 +212,7 @@
   filter: alpha(opacity=90);
 }
 .cycle-nav {
+  background: transparent;
   text-align: center;
   list-style-type: none;
   margin: 0;
