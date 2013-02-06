@@ -8,6 +8,7 @@
 .cycle .cycle-inner {
   overflow: hidden;
   width: 100%;
+  height: auto;
   position: relative;
   z-index: 2;
 }
