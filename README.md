@@ -25,8 +25,8 @@ To Do
 --------------------
 
 * More advanced examples
-* Test with Opera, IE7
-* Make unit tests
+* Test with Opera
+* Write unit tests
 
 Release Notes
 --------------------
