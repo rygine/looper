@@ -42,6 +42,7 @@
 @cycle-control-opacity-hover:     90;
 
 // Cycle navigation
+@cycle-nav-background:            transparent;
 @cycle-nav-size:                  36px;
 @cycle-nav-link-color:            #049cdb;
 @cycle-nav-link-color-hover:      darken(@cycle-nav-link-color, 15%);
@@ -334,6 +335,7 @@
 
 // this element is expected to be a list, OL or UL (feel free to adjust)
 .cycle-nav {
+  background: @cycle-nav-background;
   text-align: center;
   list-style-type:none;
   margin:0;
