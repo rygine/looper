@@ -30,6 +30,8 @@
 // Cycle controls
 @cycle-control-width:             40px;
 @cycle-control-height:            40px;
+@cycle-control-left:              -(@cycle-control-width / 2);
+@cycle-control-right:             -(@cycle-control-width / 2);
 @cycle-control-size:              30px;
 @cycle-control-background-color:  #333;
 @cycle-control-border:            3px solid #fff;
@@ -294,7 +296,7 @@
   position: absolute;
   z-index: 5;
   top: 50%;
-  left: -(@cycle-control-width / 2);
+  left: @cycle-control-left;
   width: @cycle-control-width;
   height: @cycle-control-height;
   margin-top: -(@cycle-control-height / 2);
@@ -315,7 +317,7 @@
   // right control
   &.right {
     left: auto;
-    right: -(@cycle-control-width / 2);
+    right: @cycle-control-right;
   }
 
   // hover state
@@ -333,7 +335,6 @@
 // this element is expected to be a list, OL or UL (feel free to adjust)
 .cycle-nav {
   text-align: center;
-  padding:5px 0;
   list-style-type:none;
   margin:0;
   > li {
