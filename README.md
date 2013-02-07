@@ -34,6 +34,7 @@ Release Notes
 
 1.1.1
 * Changed plugin name to Looper.js to avoid confusion with other plugins
+* Event names have been changed accordingly 'cycle' -> 'show' and 'cycled' -> 'shown'
 
 1.1.0
 * Added ARIA support with keyboard navigation
