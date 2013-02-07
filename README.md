@@ -1,9 +1,9 @@
-Cycle.js
+Looper.js
 =================
 
 Cycle through your content without writing a single line of Javascript. To keep things simple, transition effects are optional and have been limited to slide and cross-fade. In browsers that don't support CSS transitions, jQuery's animate is used.
 
-To get started, read the docs: http://rygine.com/projects/cycle.js/docs/
+To get started, read the docs: http://rygine.com/projects/looper.js/docs/
 
 Key Features
 --------------------
@@ -31,6 +31,9 @@ To Do
 
 Release Notes
 --------------------
+
+1.1.1
+* Changed plugin name to Looper.js to avoid confusion with other plugins
 
 1.1.0
 * Added ARIA support with keyboard navigation

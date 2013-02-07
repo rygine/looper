@@ -5,12 +5,12 @@
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
 <head>
     <meta charset="utf-8">
-    <title>Cycle.js | a jQuery plugin</title>
+    <title>Looper.js | a jQuery plugin</title>
     <meta name="description" content="An intuitive, lightweight carousel plugin that works without scripting.">
     <meta name="keywords" content="jQuery, plugin, cycle, rotate, slide, fade, animate">
     <meta name="author" content="Ry Racherbaumer">
     <meta name="viewport" content="width=device-width">
-    <link rel="stylesheet" href="../css/cycle.css">
+    <link rel="stylesheet" href="../css/looper.css">
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/bootstrap-responsive.css">
     <link rel="stylesheet" href="js/google-code-prettify/prettify.css">
@@ -18,12 +18,12 @@
 </head>
 <body data-spy="scroll" data-target="aside">
     <header class="jumbotron">
-        <h1><i class="icon-refresh"></i> Cycle.js <small>a jQuery plugin</small></h1>
+        <h1><i class="icon-refresh"></i> Looper.js <small>a jQuery plugin</small></h1>
         <p>An intuitive, lightweight carousel solution. No coding required.</p>
-        <a class="btn btn-primary btn-large" href="https://github.com/rygine/cycle/archive/master.zip">Download</a>
+        <a class="btn btn-primary btn-large" href="https://github.com/rygine/looper/archive/master.zip">Download</a>
         <ul>
-            <li><a href="https://github.com/rygine/cycle">GitHub Project</a></li>
-            <li>Version 1.1.0</li>
+            <li><a href="https://github.com/rygine/looper">GitHub Project</a></li>
+            <li>Version 1.1.1</li>
         </ul>
     </header>
     <div id="page" role="main">
@@ -79,14 +79,14 @@
 &lt;!DOCTYPE html&gt;
 &lt;html&gt;
 &lt;head&gt;
-    &lt;title&gt;Cycle.js&lt;/title&gt;
+    &lt;title&gt;Looper.js&lt;/title&gt;
     &lt;meta charset=&quot;utf-8&quot;&gt;
-    &lt;link rel=&quot;stylesheet&quot; href=&quot;./path/to/cycle.css&quot;&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;./path/to/looper.css&quot;&gt;
 &lt;/head&gt;
 &lt;body&gt;
     &lt;!-- Your HTML goes here --&gt;
     &lt;script src=&quot;./path/to/jquery.js&quot;&gt;&lt;/script&gt;
-    &lt;script src=&quot;./path/to/cycle.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;./path/to/looper.js&quot;&gt;&lt;/script&gt;
 &lt;/body&gt;
 &lt;/html&gt;
 </pre>
@@ -94,9 +94,9 @@
                         </section>
                         <section id="usage-data-attributes">
                             <h3>Via data attributes</h3>
-                            <p>To initialize a plugin instance, simply add <code>data-cycle="go"</code> to your element. Be sure to add the <code>cycle</code> class for proper styling.</p>
+                            <p>To initialize a plugin instance, simply add <code>data-looper="go"</code> to your element. Be sure to add the <code>looper</code> class for proper styling.</p>
 <pre class="prettyprint linenums">
-&lt;div data-cycle=&quot;go&quot; class=&quot;cycle&quot;&gt;
+&lt;div data-looper=&quot;go&quot; class=&quot;looper&quot;&gt;
     ...
 &lt;/div&gt;
 </pre>
@@ -104,14 +104,14 @@
                         <section id="usage-javascript">
                             <h3>Via Javascript</h3>
 <pre class="prettyprint linenums">
-$('.cycle').cycle();
+$('.looper').looper();
 </pre>
                         </section>
                         <section id="usage-accessing-instances">
                             <h3>Accessing instances</h3>
-                            <p>Plugin instances are stored in the <code>cyclejs</code> key on each element's data store and can easily be accessed by using jQuery's <a href="http://api.jquery.com/data/">data</a> method.</p>
+                            <p>Plugin instances are stored in the <code>looperjs</code> key on each element's data store and can easily be accessed by using jQuery's <a href="http://api.jquery.com/data/">data</a> method.</p>
 <pre class="prettyprint linenums">
-var myCycle = $('.cycle').data('cyclejs');
+var myLooper = $('.looper').data('looperjs');
 </pre>
                         </section>
                         <section id="usage-options">
@@ -131,14 +131,14 @@ var myCycle = $('.cycle').data('cyclejs');
                                         <td>interval</td>
                                         <td>number</td>
                                         <td>5000</td>
-                                        <td>The amount of time (in milliseconds) to display an item between cycles. To disable the auto-cycle, set to <code>false</code>.</td>
+                                        <td>The amount of time (in milliseconds) to display an item. To disable the auto-loop, set to <code>false</code>.</td>
                                     </tr>
                                     <tr>
                                         <td>pause</td>
                                         <td>string</td>
                                         <td>hover</td>
                                         <td>
-                                            <p>When to pause the auto-cycle. Set to <code>false</code> to disable.</p>
+                                            <p>When to pause the auto-loop. Set to <code>false</code> to disable.</p>
                                             <table class="table table-bordered table-striped">
                                                 <thead>
                                                     <tr>
@@ -171,68 +171,68 @@ var myCycle = $('.cycle').data('cyclejs');
                                         <td>speed</td>
                                         <td>number</td>
                                         <td>500</td>
-                                        <td>The amount of time (in milliseconds) that corresponds to the CSS transition speed specified in cycle.css. This value is used to ensure transitions are completed and as the animation speed for browsers that don't support CSS transitions.</td>
+                                        <td>The amount of time (in milliseconds) that corresponds to the CSS transition speed specified in looper.css. This value is used to ensure transitions are completed and as the animation speed for browsers that don't support CSS transitions.</td>
                                     </tr>
                                 </tbody>
                             </table>
                         </section>
                         <section id="usage-methods">
                             <h3>Methods</h3>
-                            <p>All methods can be executed with the <code>data-cycle</code> attribute and require a <code>data-target</code> or <code>href</code> attribute whose value must correspond to the ID of a Cycle.js element. See below for examples.</p>
+                            <p>All methods can be executed with the <code>data-looper</code> attribute and require a <code>data-target</code> or <code>href</code> attribute whose value must correspond to the ID of a Looper.js element. See below for examples.</p>
                             <dl>
-                                <dt>.cycle(options)</dt>
+                                <dt>.looper(options)</dt>
                                 <dd>
                                     <p>Initializes an instance with an <em>optional</em> options <code>object</code>.</p>
 <pre class="prettyprint linenums">
-$('.cycle').cycle({
+$('.looper').looper({
     interval: 3000
 });
 </pre>
                                 </dd>
-                                <dt>.cycle('cycle')</dt>
+                                <dt>.looper('loop')</dt>
                                 <dd>
-                                    <p>Starts/resumes the auto-cycle.</p>
+                                    <p>Starts/resumes the auto-loop.</p>
                                     <p><strong>Via data attribute</strong></p>
 <pre class="prettyprint linenums">
-&lt;div id=&quot;myCycle&quot; class=&quot;cycle&quot;&gt;
+&lt;div id=&quot;myLooper&quot; class=&quot;looper&quot;&gt;
     ...
 &lt;/div&gt;
 </pre>
 <pre class="prettyprint linenums">
-&lt;a data-cycle=&quot;cycle&quot; href=&quot;#myCycle&quot;&gt;Cycle&lt;/a&gt;
+&lt;a data-looper=&quot;looper&quot; href=&quot;#myLooper&quot;&gt;Looper&lt;/a&gt;
 </pre>
                                 </dd>
-                                <dt>.cycle('pause')</dt>
+                                <dt>.looper('pause')</dt>
                                 <dd>
-                                    <p>Pause the auto-cycle.</p>
+                                    <p>Pause the auto-loop.</p>
                                     <p><strong>Via data attribute</strong></p>
 <pre class="prettyprint linenums">
-&lt;a data-cycle=&quot;pause&quot; href=&quot;#myCycle&quot;&gt;Pause&lt;/a&gt;
+&lt;a data-looper=&quot;pause&quot; href=&quot;#myLooper&quot;&gt;Pause&lt;/a&gt;
 </pre>
                                 </dd>
-                                <dt>.cycle('next')</dt>
+                                <dt>.looper('next')</dt>
                                 <dd>
-                                    <p>Cycle to the next item.</p>
+                                    <p>Show the next item.</p>
                                     <p><strong>Via data attribute</strong></p>
 <pre class="prettyprint linenums">
-&lt;a data-cycle=&quot;next&quot; href=&quot;#myCycle&quot;&gt;Next&lt;/a&gt;
+&lt;a data-looper=&quot;next&quot; href=&quot;#myLooper&quot;&gt;Next&lt;/a&gt;
 </pre>
                                 </dd>
-                                <dt>.cycle('prev')</dt>
+                                <dt>.looper('prev')</dt>
                                 <dd>
-                                    <p>Cycle to the previous item.</p>
+                                    <p>Show the previous item.</p>
                                     <p><strong>Via data attribute</strong></p>
 <pre class="prettyprint linenums">
-&lt;a data-cycle=&quot;prev&quot; href=&quot;#myCycle&quot;&gt;Previous&lt;/a&gt;
+&lt;a data-looper=&quot;prev&quot; href=&quot;#myLooper&quot;&gt;Previous&lt;/a&gt;
 </pre>
                                 </dd>
-                                <dt>.cycle('to', <em>position</em>)</dt>
+                                <dt>.looper('to', <em>position</em>)</dt>
                                 <dd>
-                                    <p>Cycle to the item at the specified position.</p>
+                                    <p>Show the item at the specified position.</p>
                                     <p class="alert alert-warning"><strong>Be aware!</strong> The position argument is one-based. A value of <code>1</code> corresponds to the <strong>first</strong> item. Negative, zero and out-of-range positions will be ignored.</p>
                                     <p><strong>Via data attribute</strong></p>
 <pre class="prettyprint linenums">
-&lt;a data-cycle=&quot;to&quot; data-args=&quot;3&quot; href=&quot;#myCycle&quot;&gt;Go to item 3&lt;/a&gt;
+&lt;a data-looper=&quot;to&quot; data-args=&quot;3&quot; href=&quot;#myLooper&quot;&gt;Go to item 3&lt;/a&gt;
 </pre>
                                     <p>The <code>data-args</code> attribute is used to pass arguments to a method.</p>
                                 </dd>
@@ -253,9 +253,9 @@ $('.cycle').cycle({
                                         <td>Fires after an instance has been initialized.</td>
                                     </tr>
                                     <tr>
-                                        <td>cycle</td>
+                                        <td>show</td>
                                         <td>
-                                            <p>Fires before a new item is cycled into view.</p>
+                                            <p>Fires before a new item is shown.</p>
                                             <table class="table table-bordered table-striped">
                                                 <thead>
                                                     <tr>
@@ -266,21 +266,21 @@ $('.cycle').cycle({
                                                 <tbody>
                                                     <tr>
                                                         <td>relatedTarget</td>
-                                                        <td>The item element being cycled into view.</td>
+                                                        <td>The item element being shown.</td>
                                                     </tr>
                                                     <tr>
                                                         <td>relatedIndex</td>
-                                                        <td>The index of the item element being cycled into view.</td>
+                                                        <td>The index of the item element being shown.</td>
                                                     </tr>
                                                 </tbody>
                                             </table>
-                                            <p>Use <code>e.preventDefault()</code> on this event to cancel the cycling of an item.</p>
+                                            <p>Use <code>e.preventDefault()</code> on this event to cancel the showing of an item.</p>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>cycled</td>
+                                        <td>shown</td>
                                         <td>
-                                            <p>Fired after a new item has been cycled into view.</p>
+                                            <p>Fired after a new item has been shown.</p>
                                             <table class="table table-bordered table-striped">
                                                 <thead>
                                                     <tr>
@@ -291,11 +291,11 @@ $('.cycle').cycle({
                                                 <tbody>
                                                     <tr>
                                                         <td>relatedTarget</td>
-                                                        <td>The item element that was cycled into view.</td>
+                                                        <td>The item element that was shown.</td>
                                                     </tr>
                                                     <tr>
                                                         <td>relatedIndex</td>
-                                                        <td>The index of the item element cycled into view.</td>
+                                                        <td>The index of the item element shown.</td>
                                                     </tr>
                                                 </tbody>
                                             </table>
@@ -306,28 +306,28 @@ $('.cycle').cycle({
                         </section>
                         <section id="usage-transitions">
                             <h3>Transitions</h3>
-                            <p>Items can be cycled with a sliding and/or cross-fade effect. To apply a transition, simply add the proper CSS class. For a sliding transition, add <code>slide</code>. For a cross-fade effect, add <code>xfade</code>. The <code>slide</code> transition has 3 optional classes: <code>right</code>, <code>up</code> and <code>down</code>. Each optional class corresponds to the sliding direction.</p>
+                            <p>Items can be shown with a sliding and/or cross-fade effect. To apply a transition, simply add the proper CSS class. For a sliding transition, add <code>slide</code>. For a cross-fade effect, add <code>xfade</code>. The <code>slide</code> transition has 3 optional classes: <code>right</code>, <code>up</code> and <code>down</code>. Each optional class corresponds to the sliding direction.</p>
                             <h4>Default slide <small>from the right</small></h4>
 <pre class="prettyprint linenums">
-&lt;div class=&quot;cycle slide&quot;&gt;
+&lt;div class=&quot;looper slide&quot;&gt;
     ...
 &lt;/div&gt;
 </pre>
                             <h4>Slide up</h4>
 <pre class="prettyprint linenums">
-&lt;div class=&quot;cycle slide up&quot;&gt;
+&lt;div class=&quot;looper slide up&quot;&gt;
     ...
 &lt;/div&gt;
 </pre>
                             <h4>Cross-fade</h4>
 <pre class="prettyprint linenums">
-&lt;div class=&quot;cycle xfade&quot;&gt;
+&lt;div class=&quot;looper xfade&quot;&gt;
     ...
 &lt;/div&gt;
 </pre>
                             <h4>Slide down with cross-fade</h4>
 <pre class="prettyprint linenums">
-&lt;div class=&quot;cycle xfade slide down&quot;&gt;
+&lt;div class=&quot;looper xfade slide down&quot;&gt;
     ...
 &lt;/div&gt;
 </pre>
@@ -340,11 +340,11 @@ $('.cycle').cycle({
                         <p>Images for these examples are provided by the amazing <a href="http://lorempixel.com/">lorempixel</a> service.</p>
                         <section id="examples-basic">
                             <h3>Basic</h3>
-                            <p>The following example will auto-cycle through items at the specified duration without a transition.</p>
+                            <p>The following example will auto-loop through items at the specified duration without a transition.</p>
                             <h5>HTML</h5>
 <pre class="prettyprint linenums">
-&lt;div data-cycle=&quot;go&quot; class=&quot;cycle&quot;&gt;
-    &lt;div class=&quot;cycle-inner&quot;&gt;
+&lt;div data-looper=&quot;go&quot; class=&quot;looper&quot;&gt;
+    &lt;div class=&quot;looper-inner&quot;&gt;
         &lt;div class=&quot;item&quot;&gt;
             &lt;img src=&quot;http://lorempixel.com/320/240/sports&quot; alt=&quot;&quot;&gt;
         &lt;/div&gt;
@@ -358,8 +358,8 @@ $('.cycle').cycle({
 &lt;/div&gt;
 </pre>
                             <h5>Result</h5>
-                            <div data-cycle="go" class="cycle">
-                                <div class="cycle-inner">
+                            <div data-looper="go" class="looper">
+                                <div class="looper-inner">
                                     <div class="item">
                                         <img src="http://lorempixel.com/320/240/sports" alt="">
                                     </div>
@@ -375,11 +375,11 @@ $('.cycle').cycle({
                         <h3>Transitions</h3>
                         <section id="examples-slide">
                             <h4>Slide</h4>
-                            <p>This example will auto-cycle through items with a slide transition.</p>
+                            <p>This example will auto-loop through items with a slide transition.</p>
                             <h5>HTML</h5>
 <pre class="prettyprint linenums">
-&lt;div data-cycle=&quot;go&quot; class=&quot;cycle slide&quot;&gt;
-    &lt;div class=&quot;cycle-inner&quot;&gt;
+&lt;div data-looper=&quot;go&quot; class=&quot;looper slide&quot;&gt;
+    &lt;div class=&quot;looper-inner&quot;&gt;
         &lt;div class=&quot;item&quot;&gt;
             &lt;img src=&quot;http://lorempixel.com/320/240/sports&quot; alt=&quot;&quot;&gt;
         &lt;/div&gt;
@@ -393,8 +393,8 @@ $('.cycle').cycle({
 &lt;/div&gt;
 </pre>
                             <h5>Result</h5>
-                            <div data-cycle="go" class="cycle slide">
-                                <div class="cycle-inner">
+                            <div data-looper="go" class="looper slide">
+                                <div class="looper-inner">
                                     <div class="item">
                                         <img src="http://lorempixel.com/320/240/sports" alt="">
                                     </div>
@@ -411,8 +411,8 @@ $('.cycle').cycle({
                             <h4>Slide up</h4>
                             <h5>HTML</h5>
 <pre class="prettyprint linenums">
-&lt;div data-cycle=&quot;go&quot; class=&quot;cycle slide up&quot;&gt;
-    &lt;div class=&quot;cycle-inner&quot;&gt;
+&lt;div data-looper=&quot;go&quot; class=&quot;looper slide up&quot;&gt;
+    &lt;div class=&quot;looper-inner&quot;&gt;
         &lt;div class=&quot;item&quot;&gt;
             &lt;img src=&quot;http://lorempixel.com/320/240/sports&quot; alt=&quot;&quot;&gt;
         &lt;/div&gt;
@@ -426,8 +426,8 @@ $('.cycle').cycle({
 &lt;/div&gt;
 </pre>
                             <h5>Result</h5>
-                            <div data-cycle="go" class="cycle slide up">
-                                <div class="cycle-inner">
+                            <div data-looper="go" class="looper slide up">
+                                <div class="looper-inner">
                                     <div class="item">
                                         <img src="http://lorempixel.com/320/240/sports" alt="">
                                     </div>
@@ -444,8 +444,8 @@ $('.cycle').cycle({
                             <h4>Cross-fade</h4>
                             <h5>HTML</h5>
 <pre class="prettyprint linenums">
-&lt;div data-cycle=&quot;go&quot; class=&quot;cycle xfade&quot;&gt;
-    &lt;div class=&quot;cycle-inner&quot;&gt;
+&lt;div data-looper=&quot;go&quot; class=&quot;looper xfade&quot;&gt;
+    &lt;div class=&quot;looper-inner&quot;&gt;
         &lt;div class=&quot;item&quot;&gt;
             &lt;img src=&quot;http://lorempixel.com/320/240/sports&quot; alt=&quot;&quot;&gt;
         &lt;/div&gt;
@@ -459,8 +459,8 @@ $('.cycle').cycle({
 &lt;/div&gt;
 </pre>
                             <h5>Result</h5>
-                            <div data-cycle="go" class="cycle xfade">
-                                <div class="cycle-inner">
+                            <div data-looper="go" class="looper xfade">
+                                <div class="looper-inner">
                                     <div class="item">
                                         <img src="http://lorempixel.com/320/240/sports" alt="">
                                     </div>
@@ -477,8 +477,8 @@ $('.cycle').cycle({
                             <h4>Slide down cross-fade</h4>
                             <h5>HTML</h5>
 <pre class="prettyprint linenums">
-&lt;div data-cycle=&quot;go&quot; class=&quot;cycle xfade slide down&quot;&gt;
-    &lt;div class=&quot;cycle-inner&quot;&gt;
+&lt;div data-looper=&quot;go&quot; class=&quot;looper xfade slide down&quot;&gt;
+    &lt;div class=&quot;looper-inner&quot;&gt;
         &lt;div class=&quot;item&quot;&gt;
             &lt;img src=&quot;http://lorempixel.com/320/240/sports&quot; alt=&quot;&quot;&gt;
         &lt;/div&gt;
@@ -492,8 +492,8 @@ $('.cycle').cycle({
 &lt;/div&gt;
 </pre>
                             <h5>Result</h5>
-                            <div data-cycle="go" class="cycle xfade slide down">
-                                <div class="cycle-inner">
+                            <div data-looper="go" class="looper xfade slide down">
+                                <div class="looper-inner">
                                     <div class="item">
                                         <img src="http://lorempixel.com/320/240/sports" alt="">
                                     </div>
@@ -510,8 +510,8 @@ $('.cycle').cycle({
                             <h4>With controls</h4>
                             <h5>HTML</h5>
 <pre class="prettyprint linenums">
-&lt;div id=&quot;controlCycle&quot; data-cycle=&quot;go&quot; class=&quot;cycle slide&quot;&gt;
-    &lt;div class=&quot;cycle-inner&quot;&gt;
+&lt;div id=&quot;controlLooper&quot; data-looper=&quot;go&quot; class=&quot;looper slide&quot;&gt;
+    &lt;div class=&quot;looper-inner&quot;&gt;
         &lt;div class=&quot;item&quot;&gt;
             &lt;img src=&quot;http://lorempixel.com/320/240/sports&quot; alt=&quot;&quot;&gt;
         &lt;/div&gt;
@@ -523,18 +523,18 @@ $('.cycle').cycle({
         &lt;/div&gt;
     &lt;/div&gt;
     &lt;nav&gt;
-        &lt;a class=&quot;cycle-control&quot; data-cycle=&quot;prev&quot; href=&quot;#controlCycle&quot;&gt;
+        &lt;a class=&quot;looper-control&quot; data-looper=&quot;prev&quot; href=&quot;#controlLooper&quot;&gt;
             &lt;i class=&quot;icon-chevron-left&quot;&gt;&lt;/i&gt;
         &lt;/a&gt;
-        &lt;a class=&quot;cycle-control right&quot; data-cycle=&quot;next&quot; href=&quot;#controlCycle&quot;&gt;
+        &lt;a class=&quot;looper-control right&quot; data-looper=&quot;next&quot; href=&quot;#controlLooper&quot;&gt;
             &lt;i class=&quot;icon-chevron-right&quot;&gt;&lt;/i&gt;
         &lt;/a&gt;
     &lt;/nav&gt;
 &lt;/div&gt;
 </pre>
                             <h5>Result</h5>
-                            <div id="controlCycle" data-cycle="go" class="cycle slide">
-                                <div class="cycle-inner">
+                            <div id="controlLooper" data-looper="go" class="looper slide">
+                                <div class="looper-inner">
                                     <div class="item">
                                         <img src="http://lorempixel.com/320/240/sports" alt="">
                                     </div>
@@ -546,10 +546,10 @@ $('.cycle').cycle({
                                     </div>
                                 </div>
                                 <nav>
-                                    <a class="cycle-control" data-cycle="prev" href="#controlCycle">
+                                    <a class="looper-control" data-looper="prev" href="#controlLooper">
                                         <i class="icon-chevron-left"></i>
                                     </a>
-                                    <a class="cycle-control right" data-cycle="next" href="#controlCycle">
+                                    <a class="looper-control right" data-looper="next" href="#controlLooper">
                                         <i class="icon-chevron-right"></i>
                                     </a>
                                 </nav>
@@ -560,8 +560,8 @@ $('.cycle').cycle({
                             <p>Click on the bullets to navigate to the corresponding item.</p>
                             <h5>HTML</h5>
 <pre class="prettyprint linenums">
-&lt;div id=&quot;bulletCycle&quot; data-cycle=&quot;go&quot; class=&quot;cycle slide&quot;&gt;
-    &lt;div class=&quot;cycle-inner&quot;&gt;
+&lt;div id=&quot;bulletLooper&quot; data-looper=&quot;go&quot; class=&quot;looper slide&quot;&gt;
+    &lt;div class=&quot;looper-inner&quot;&gt;
         &lt;div class=&quot;item&quot;&gt;
             &lt;img src=&quot;http://lorempixel.com/320/240/sports&quot; alt=&quot;&quot;&gt;
         &lt;/div&gt;
@@ -573,16 +573,16 @@ $('.cycle').cycle({
         &lt;/div&gt;
     &lt;/div&gt;
     &lt;nav&gt;
-        &lt;a class=&quot;cycle-control&quot; data-cycle=&quot;prev&quot; href=&quot;#bulletCycle&quot;&gt;
+        &lt;a class=&quot;looper-control&quot; data-looper=&quot;prev&quot; href=&quot;#bulletLooper&quot;&gt;
             &lt;i class=&quot;icon-chevron-left&quot;&gt;&lt;/i&gt;
         &lt;/a&gt;
-        &lt;a class=&quot;cycle-control right&quot; data-cycle=&quot;next&quot; href=&quot;#bulletCycle&quot;&gt;
+        &lt;a class=&quot;looper-control right&quot; data-looper=&quot;next&quot; href=&quot;#bulletLooper&quot;&gt;
             &lt;i class=&quot;icon-chevron-right&quot;&gt;&lt;/i&gt;
         &lt;/a&gt;
-        &lt;ul class=&quot;cycle-nav&quot;&gt;
-            &lt;li&gt;&lt;a href=&quot;#bulletCycle&quot; data-cycle=&quot;to&quot; data-args=&quot;1&quot;&gt;&amp;bull;&lt;/a&gt;&lt;/li&gt;
-            &lt;li&gt;&lt;a href=&quot;#bulletCycle&quot; data-cycle=&quot;to&quot; data-args=&quot;2&quot;&gt;&amp;bull;&lt;/a&gt;&lt;/li&gt;
-            &lt;li&gt;&lt;a href=&quot;#bulletCycle&quot; data-cycle=&quot;to&quot; data-args=&quot;3&quot;&gt;&amp;bull;&lt;/a&gt;&lt;/li&gt;
+        &lt;ul class=&quot;looper-nav&quot;&gt;
+            &lt;li&gt;&lt;a href=&quot;#bulletLooper&quot; data-looper=&quot;to&quot; data-args=&quot;1&quot;&gt;&amp;bull;&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&quot;#bulletLooper&quot; data-looper=&quot;to&quot; data-args=&quot;2&quot;&gt;&amp;bull;&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&quot;#bulletLooper&quot; data-looper=&quot;to&quot; data-args=&quot;3&quot;&gt;&amp;bull;&lt;/a&gt;&lt;/li&gt;
         &lt;/ul&gt;
     &lt;/nav&gt;
 &lt;/div&gt;
@@ -591,8 +591,8 @@ $('.cycle').cycle({
 <pre class="prettyprint linenums">
 &lt;script&gt;
     jQuery(function($){
-        $('#bulletCycle').on('cycled', function(e){
-            $('.cycle-nav &gt; li', this)
+        $('#bulletLooper').on('shown', function(e){
+            $('.looper-nav &gt; li', this)
                     .removeClass('active')
                     .eq(e.relatedIndex)
                         .addClass('active');
@@ -601,8 +601,8 @@ $('.cycle').cycle({
 &lt;/script&gt;
 </pre>
                             <h5>Result</h5>
-                            <div id="bulletCycle" data-interval="0" data-cycle="go" class="cycle slide">
-                                <div class="cycle-inner">
+                            <div id="bulletLooper" data-interval="0" data-looper="go" class="looper slide">
+                                <div class="looper-inner">
                                     <div class="item">
                                         <img src="http://lorempixel.com/320/240/sports" alt="">
                                     </div>
@@ -614,16 +614,16 @@ $('.cycle').cycle({
                                     </div>
                                 </div>
                                 <nav>
-                                    <a class="cycle-control" data-cycle="prev" href="#bulletCycle">
+                                    <a class="looper-control" data-looper="prev" href="#bulletLooper">
                                         <i class="icon-chevron-left"></i>
                                     </a>
-                                    <a class="cycle-control right" data-cycle="next" href="#bulletCycle">
+                                    <a class="looper-control right" data-looper="next" href="#bulletLooper">
                                         <i class="icon-chevron-right"></i>
                                     </a>
-                                    <ul class="cycle-nav">
-                                        <li><a href="#bulletCycle" data-cycle="to" data-args="1">&bull;</a></li>
-                                        <li><a href="#bulletCycle" data-cycle="to" data-args="2">&bull;</a></li>
-                                        <li><a href="#bulletCycle" data-cycle="to" data-args="3">&bull;</a></li>
+                                    <ul class="looper-nav">
+                                        <li><a href="#bulletLooper" data-looper="to" data-args="1">&bull;</a></li>
+                                        <li><a href="#bulletLooper" data-looper="to" data-args="2">&bull;</a></li>
+                                        <li><a href="#bulletLooper" data-looper="to" data-args="3">&bull;</a></li>
                                     </ul>
                                 </nav>
                             </div>
@@ -648,12 +648,12 @@ $('.cycle').cycle({
     <script src="js/bootstrap-affix.js"></script>
     <script src="js/bootstrap-tab.js"></script>
     <script src="js/google-code-prettify/prettify.js"></script>
-    <script src="../src/cycle.js"></script>
+    <script src="../src/looper.js"></script>
     <script src="js/main.js"></script>
     <script>
         jQuery(function($){
-            $('#bulletCycle').on('cycled', function(e){
-                $('.cycle-nav > li', this)
+            $('#bulletLooper').on('shown', function(e){
+                $('.looper-nav > li', this)
                         .removeClass('active')
                         .eq(e.relatedIndex)
                             .addClass('active');

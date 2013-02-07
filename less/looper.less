@@ -20,55 +20,55 @@
   border-radius: @radius;
 }
 
-// Cycle
-@cycle-width:                     auto;
-@cycle-height:                    auto;
-@cycle-transition-speed:          .5s;
-@cycle-easing-slide:              ease-in-out;
-@cycle-easing-xfade:              ease-in;
+// Looper
+@looper-width:                     auto;
+@looper-height:                    auto;
+@looper-transition-speed:          .5s;
+@looper-easing-slide:              ease-in-out;
+@looper-easing-xfade:              ease-in;
 
-// Cycle controls
-@cycle-control-width:             40px;
-@cycle-control-height:            40px;
-@cycle-control-left:              -(@cycle-control-width / 2);
-@cycle-control-right:             -(@cycle-control-width / 2);
-@cycle-control-size:              30px;
-@cycle-control-background-color:  #333;
-@cycle-control-border:            3px solid #fff;
-@cycle-control-border-radius:     23px;
-@cycle-control-color:             #fff;
-@cycle-control-color-hover:       @cycle-control-color;
-@cycle-control-opacity:           50;
-@cycle-control-opacity-hover:     90;
+// Looper controls
+@looper-control-width:             40px;
+@looper-control-height:            40px;
+@looper-control-left:              -(@looper-control-width / 2);
+@looper-control-right:             -(@looper-control-width / 2);
+@looper-control-size:              30px;
+@looper-control-background-color:  #333;
+@looper-control-border:            3px solid #fff;
+@looper-control-border-radius:     23px;
+@looper-control-color:             #fff;
+@looper-control-color-hover:       @looper-control-color;
+@looper-control-opacity:           50;
+@looper-control-opacity-hover:     90;
 
-// Cycle navigation
-@cycle-nav-background:            transparent;
-@cycle-nav-size:                  36px;
-@cycle-nav-link-color:            #049cdb;
-@cycle-nav-link-color-hover:      darken(@cycle-nav-link-color, 15%);
-@cycle-nav-link-color-active:     @cycle-nav-link-color-hover;
+// Looper navigation
+@looper-nav-background:            transparent;
+@looper-nav-size:                  36px;
+@looper-nav-link-color:            #049cdb;
+@looper-nav-link-color-hover:      darken(@looper-nav-link-color, 15%);
+@looper-nav-link-color-active:     @looper-nav-link-color-hover;
 
 //
-// Cycle
+// Looper
 // --------------------------------------------------
 
-.cycle {
+.looper {
   position: relative;
   z-index: 1;
   line-height: 1;
-  width: @cycle-width;
-  height: @cycle-height;
+  width: @looper-width;
+  height: @looper-height;
 
-  .cycle-inner {
+  .looper-inner {
     overflow: hidden;
     width: 100%;
-    height: @cycle-height;
+    height: @looper-height;
     position: relative;
     z-index: 2;
   }
 }
 
-.cycle {
+.looper {
 
   .item {
     display: none;
@@ -96,12 +96,12 @@
 
   &.xfade {
 
-    .cycle-inner {
+    .looper-inner {
       height: 100%;
     }
 
     .item {
-      .transition(@cycle-transition-speed @cycle-easing-xfade opacity);
+      .transition(@looper-transition-speed @looper-easing-xfade opacity);
       position: absolute;
       width: 100%;
       opacity: 0;
@@ -125,11 +125,11 @@
 
     // slide with cross-fade
     &.xfade .item {
-      .transition(@cycle-transition-speed @cycle-easing-slide left, @cycle-transition-speed @cycle-easing-xfade opacity);
+      .transition(@looper-transition-speed @looper-easing-slide left, @looper-transition-speed @looper-easing-xfade opacity);
     }
 
     .item {
-      .transition(@cycle-transition-speed @cycle-easing-slide left);
+      .transition(@looper-transition-speed @looper-easing-slide left);
 
       // next/prev slide
       &.next,
@@ -198,12 +198,12 @@
     // slide down
     &.down {
 
-      .cycle-inner {
+      .looper-inner {
         height: 100%;
       }
 
       .item {
-        .transition(@cycle-transition-speed @cycle-easing-slide top);
+        .transition(@looper-transition-speed @looper-easing-slide top);
 
         &.next,
         &.prev {
@@ -236,8 +236,8 @@
 
       &.xfade .item {
         .transition(
-          @cycle-transition-speed @cycle-easing-slide top,
-          @cycle-transition-speed @cycle-easing-xfade opacity
+          @looper-transition-speed @looper-easing-slide top,
+          @looper-transition-speed @looper-easing-xfade opacity
         );
       }
     }
@@ -245,12 +245,12 @@
     // slide up
     &.up {
 
-      .cycle-inner {
+      .looper-inner {
         height: 100%;
       }
 
       .item {
-        .transition(@cycle-transition-speed @cycle-easing-slide top);
+        .transition(@looper-transition-speed @looper-easing-slide top);
 
         &.next,
         &.prev {
@@ -283,8 +283,8 @@
 
       &.xfade .item {
         .transition(
-          @cycle-transition-speed @cycle-easing-slide top,
-          @cycle-transition-speed @cycle-easing-xfade opacity
+          @looper-transition-speed @looper-easing-slide top,
+          @looper-transition-speed @looper-easing-xfade opacity
         );
       }
     }
@@ -294,23 +294,23 @@
 // Left/right controls for nav
 // ---------------------------
 
-.cycle-control {
+.looper-control {
   position: absolute;
   z-index: 5;
   top: 50%;
-  left: @cycle-control-left;
-  width: @cycle-control-width;
-  height: @cycle-control-height;
-  margin-top: -(@cycle-control-height / 2);
-  font-size: @cycle-control-size;
-  line-height: @cycle-control-height;
-  color: @cycle-control-color;
+  left: @looper-control-left;
+  width: @looper-control-width;
+  height: @looper-control-height;
+  margin-top: -(@looper-control-height / 2);
+  font-size: @looper-control-size;
+  line-height: @looper-control-height;
+  color: @looper-control-color;
   text-align: center;
   cursor:pointer;
-  background: @cycle-control-background-color;
-  border: @cycle-control-border;
-  .border-radius(@cycle-control-border-radius);
-  .opacity(@cycle-control-opacity);
+  background: @looper-control-background-color;
+  border: @looper-control-border;
+  .border-radius(@looper-control-border-radius);
+  .opacity(@looper-control-opacity);
 
   // ensure no transition
   // may interfere with other transitions
@@ -319,39 +319,39 @@
   // right control
   &.right {
     left: auto;
-    right: @cycle-control-right;
+    right: @looper-control-right;
   }
 
   // hover state
   &:hover {
-    color: @cycle-control-color-hover;
+    color: @looper-control-color-hover;
     text-decoration: none;
     text-shadow:none;
-    .opacity(@cycle-control-opacity-hover);
+    .opacity(@looper-control-opacity-hover);
   }
 }
 
-// Cycle navigation elements for jumping to individual items
+// Looper navigation elements for jumping to individual items
 // ---------------------------------------------------------
 
 // this element is expected to be a list, OL or UL (feel free to adjust)
-.cycle-nav {
-  background: @cycle-nav-background;
+.looper-nav {
+  background: @looper-nav-background;
   text-align: center;
   list-style-type:none;
   margin:0;
   > li {
     display: inline-block;
-    font-size: @cycle-nav-size;
+    font-size: @looper-nav-size;
     a {
-      color: @cycle-nav-link-color;
+      color: @looper-nav-link-color;
       &:hover {
-        color: @cycle-nav-link-color-hover;
+        color: @looper-nav-link-color-hover;
       }
     }
     &.active {
       a, a:hover {
-        color: @cycle-nav-link-color-active;
+        color: @looper-nav-link-color-active;
       }
     }
   }

@@ -1,7 +1,7 @@
 /** ===========================================================================
- * Cycle.js | a jQuery plugin - v1.1.0
+ * Looper.js | a jQuery plugin - v1.1.0
  * Copyright 2013 Ry Racherbaumer
- * http://rygine.com/projects/cycle.js
+ * http://rygine.com/projects/looper.js
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -47,11 +47,11 @@
     })();
 
     // class definition
-    var Cycle = function(element, options) {
+    var Looper = function(element, options) {
 
         this.$element = $(element);
         this.options = options;
-        this.cycling = false;
+        this.looping = false;
 
         // self-reference
         var self = this;
@@ -84,21 +84,21 @@
         // setup pause on hover
         this.options.pause === 'hover' && this.$element
             .on('mouseenter', $.proxy(this.pause, this))
-            .on('mouseleave', $.proxy(this.cycle, this));
+            .on('mouseleave', $.proxy(this.loop, this));
 
         // trigger init event
         this.$element.trigger('init');
     };
 
     // class prototype definition
-    Cycle.prototype = {
+    Looper.prototype = {
 
         /**
-         * Start auto-cycle of items
+         * Start auto-loop of items
          * @param e
-         * @return Cycle
+         * @return Looper
          */
-        cycle: function(e) {
+        loop: function(e) {
             if (!e) this.paused = false;
 
             // check for interval
@@ -109,7 +109,7 @@
                 this.interval = null;
             }
 
-            // setup new cycle interval
+            // setup new loop interval
             if (this.options.interval && !this.paused)
                 this.interval = setInterval($.proxy(this.next, this), this.options.interval);
 
@@ -118,15 +118,15 @@
         },
 
         /**
-         * Pause auto-cycle of items
+         * Pause auto-loop of items
          * @param e
-         * @return Cycle
+         * @return Looper
          */
         pause: function(e) {
             if (!e) this.paused = true;
             if (this.$element.find('.next, .prev').length && cssTransitionSupport) {
                 this.$element.trigger(cssTransitionSupport);
-                this.cycle();
+                this.loop();
             }
 
             // remove interval
@@ -139,11 +139,11 @@
 
         /**
          * Show next item
-         * @return Cycle
+         * @return Looper
          */
         next: function() {
-            // return if cycling
-            if (this.cycling) return this;
+            // return if looping
+            if (this.looping) return this;
 
             // go to next item
             return this.go('next');
@@ -151,11 +151,11 @@
 
         /**
          * Show previous item
-         * @return Cycle
+         * @return Looper
          */
         prev: function() {
-            // return if cycling
-            if (this.cycling) return this;
+            // return if looping
+            if (this.looping) return this;
 
             // go to previous item
             return this.go('prev');
@@ -164,7 +164,7 @@
         /**
          * Show item at specified position
          * @param pos
-         * @return Cycle
+         * @return Looper
          */
         to: function(pos) {
             // zero-base the position
@@ -182,30 +182,30 @@
             // return if position is out of range
             if (pos > ($items.length - 1) || pos < 0) return this;
 
-            // if cycling
-            if (this.cycling)
+            // if looping
+            if (this.looping)
                 // go to item after done
-                return this.$element.one('cycled', function() {
+                return this.$element.one('shown', function() {
                     that.to(pos);
                 });
 
             // if position is already active
             if (activePos == pos)
-                // restart cycle
-                return this.pause().cycle();
+                // restart loop
+                return this.pause().loop();
 
             // show item at position
             return this.go($($items[pos]));
         },
 
         /**
-         * Cycle to item
+         * Show item
          * @param to
-         * @return Cycle
+         * @return Looper
          */
         go: function(to) {
-            // wait for current cycle to finish
-            if (this.cycling) return this;
+            // return if busy
+            if (this.looping) return this;
 
                 // all items
             var $items = this.$element.find('.item'),
@@ -217,8 +217,8 @@
                 $next = typeof to == 'string' ? $active[to]() : to,
                 // next position
                 nextPos = $items.index($next),
-                // is there an auto-cycle?
-                isCycling = this.interval,
+                // is there an auto-loop?
+                isLooping = this.interval,
                 // direction of next item
                 direction = typeof to == 'string'
                     ? to
@@ -229,14 +229,14 @@
                 fallback = direction == 'next' ? 'first' : 'last',
                 // self-reference
                 that = this,
-                // complete the cycle
+                // finish
                 complete = function(active, next, direction) {
 
-                    // if not cycling, already complete
-                    if (!this.cycling) return;
+                    // if not looping, already complete
+                    if (!this.looping) return;
 
-                    // set cycling status to false
-                    this.cycling = false;
+                    // set looping status to false
+                    this.looping = false;
 
                     // update item classes
                     active.removeClass('active go ' + direction)
@@ -247,14 +247,14 @@
                         .removeAttr('aria-hidden');
 
                     // custom event
-                    var e = $.Event('cycled', {
+                    var e = $.Event('shown', {
                         // related target is new active item
                         relatedTarget: next[0],
                         // related index is the index of the new active item
                         relatedIndex: $items.index(next)
                     });
 
-                    // trigger cycled event
+                    // trigger shown event
                     this.$element.trigger(e);
                 };
 
@@ -265,23 +265,23 @@
             if ($next.hasClass('active')) return this;
 
             // custom event
-            var e = $.Event('cycle', {
+            var e = $.Event('show', {
                 // related target is next item to show
                 relatedTarget: $next[0],
                 relatedIndex: $items.index($next[0])
             });
 
-            // trigger cycle event
+            // trigger show event
             this.$element.trigger(e);
 
             // return if the event was canceled
             if (e.isDefaultPrevented()) return this;
 
-            // set cycling status to true
-            this.cycling = true;
+            // set looping status to true
+            this.looping = true;
 
-            // if auto-cycling, pause cycle
-            if (isCycling) this.pause();
+            // if auto-looping, pause loop
+            if (isLooping) this.pause();
 
             // if using a slide or cross-fade
             if (this.$element.hasClass('slide') || this.$element.hasClass('xfade')) {
@@ -299,17 +299,17 @@
                     // add go class to next item
                     $next.addClass('go');
 
-                    // complete cycle after transition
+                    // finish after transition
                     this.$element.one(cssTransitionSupport, function() {
 
-                        // weird CSS transition when cycle element is initially hidden
-                        // make cause this event to first twice with invalid $active
+                        // weird CSS transition when element is initially hidden
+                        // may cause this event to fire twice with invalid $active
                         // element on first run
                         if (!$active.length) return;
                         complete.call(that, $active, $next, direction);
                     });
 
-                    // ensure that cycle is completed
+                    // ensure finish
                     setTimeout(function() {
                         complete.call(that, $active, $next, direction);
                     }, this.options.speed);
@@ -357,7 +357,7 @@
                     $active.animate(active, this.options.speed);
                     $next.animate(next, this.options.speed, function(){
 
-                        // complete cycle
+                        // finish
                         complete.call(that, $active, $next, direction);
 
                         // reset inline styles
@@ -370,20 +370,20 @@
             // no animation
             } else {
 
-                // complete cycle
+                // finish
                 complete.call(that, $active, $next, direction);
             }
 
-            // if auto-cycling
-            if ((isCycling || (!isCycling && this.options.interval))
+            // if auto-looping
+            if ((isLooping || (!isLooping && this.options.interval))
                 // and, no argument
                 && (!to
                     // or, argument not equal to pause option
                     || (typeof to == 'string' && to !== this.options.pause)
                     // or, argument is valid element object and pause option not equal to "to"
                     || (to.length && this.options.pause !== 'to')))
-                // start/resume cycle
-                this.cycle();
+                // start/resume loop
+                this.loop();
 
             // return reference to self for chaining
             return this;
@@ -392,77 +392,77 @@
     };
 
     // plugin definition
-    $.fn.cycle = function(option) {
-        // cycle arguments
-        var cycleArgs = arguments;
+    $.fn.looper = function(option) {
+        // looper arguments
+        var looperArgs = arguments;
 
         // for each matched element
         return this.each(function() {
             var $this = $(this),
-                cycle = $this.data('cyclejs'),
-                options = $.extend({}, $.fn.cycle.defaults, typeof option == 'object' && option),
-                action = typeof option == 'string' ? option : option.cycle,
-                args = option.args || (cycleArgs.length > 1 && Array.prototype.slice.call(cycleArgs, 1));
+                looper = $this.data('looperjs'),
+                options = $.extend({}, $.fn.looper.defaults, typeof option == 'object' && option),
+                action = typeof option == 'string' ? option : option.looper,
+                args = option.args || (looperArgs.length > 1 && Array.prototype.slice.call(looperArgs, 1));
 
-            // ensure cycle plugin
-            if (!cycle) $this.data('cyclejs', (cycle = new Cycle(this, options)));
+            // ensure looper plugin
+            if (!looper) $this.data('looperjs', (looper = new Looper(this, options)));
 
             // go to position if number
-            if (typeof option == 'number') cycle.to(option);
+            if (typeof option == 'number') looper.to(option);
 
             // execute method if string
             else if (action) {
 
                 // with arguments
-                if (args) cycle[action].apply(cycle, args.length ? args : ('' + args).split(','));
+                if (args) looper[action].apply(looper, args.length ? args : ('' + args).split(','));
 
                 // without arguments
-                else cycle[action]();
+                else looper[action]();
             }
 
-            // if there's an interval, start the auto-cycle
-            else if (options.interval) cycle.cycle();
+            // if there's an interval, start the auto-loop
+            else if (options.interval) looper.loop();
         });
     };
 
     // default options
-    $.fn.cycle.defaults = {
-        // auto-cycle interval
+    $.fn.looper.defaults = {
+        // auto-loop interval
         interval: 5000,
-        // when to pause auto-cycle
+        // when to pause auto-loop
         pause: 'hover',
         // css transition speed (must match css definition)
         speed: 500
     };
 
     // constructor
-    $.fn.cycle.Constructor = Cycle;
+    $.fn.looper.Constructor = Looper;
 
     // data api
     $(function() {
 
-        // delegate click event on elements with data-cycle attribute
-        $('body').on('click.cycle', '[data-cycle]', function(e) {
+        // delegate click event on elements with data-looper attribute
+        $('body').on('click.looper', '[data-looper]', function(e) {
             var $this = $(this);
             // ignore the init method
-            if ($this.data('cycle') == 'go') return;
+            if ($this.data('looper') == 'go') return;
                 // get element target via data (or href) attribute
             var href, $target = $($this.data('target')
                     || (href = $this.attr('href')) && href.replace(/.*(?=#[^\s]+$)/, '')), //strip for ie7
                 // setup options
                 options = $.extend({}, $target.data(), $this.data());
 
-            // start cycle plugin
-            $target.cycle(options);
+            // start looper plugin
+            $target.looper(options);
 
             // prevent default event
             e.preventDefault();
         });
 
         // auto-init plugin
-        $('[data-cycle="go"]').each(function(){
+        $('[data-looper="go"]').each(function(){
             var $this = $(this);
-            $this.cycle($this.data());
+            $this.looper($this.data());
         });
 
     });

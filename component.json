@@ -1,7 +1,7 @@
 {
-	"name": "Cycle.js",
-	"version": "1.1.0",
-	"main": ["./src/cycle.js", "./src/cycle.min.js", "./less/cycle.less", "./css/cycle.css"],
+	"name": "Looper.js",
+	"version": "1.1.1",
+	"main": ["./src/looper.js", "./src/looper.min.js", "./less/looper.less", "./css/looper.css"],
 	"dependencies": {
 		"jquery": "~1.8"
 	}
