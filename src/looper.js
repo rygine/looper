@@ -207,10 +207,13 @@
             // return if busy
             if (this.looping) return this;
 
-                // all items
-            var $items = this.$element.find('.item'),
+            // all items
+            var $items = this.$element.find('.item');
+            // return if no items found
+            if ($items.length == 0) return this;
+
                 // active item
-                $active = $items.filter('.active'),
+            var $active = $items.filter('.active'),
                 // active position
                 activePos = $items.index($active),
                 // next item to show
