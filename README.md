@@ -32,6 +32,9 @@ To Do
 Release Notes
 --------------------
 
+1.1.2
+* Fixed issue with loop not starting if no interval is set
+
 1.1.1
 * Changed plugin name to Looper.js to avoid confusion with other plugins
 * Event names have been changed accordingly 'cycle' -> 'show' and 'cycled' -> 'shown'

@@ -1,5 +1,5 @@
 /** ===========================================================================
- * Looper.js | a jQuery plugin - v1.1.1
+ * Looper.js | a jQuery plugin - v1.1.2
  * Copyright 2013 Ry Racherbaumer
  * http://rygine.com/projects/looper.js
  *
