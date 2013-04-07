@@ -22,8 +22,10 @@
 
     // css transition support detection
     var cssTransitionSupport = (function(){
+
             // body element
         var body = document.body || document.documentElement,
+
             // transition events with names
             transEndEvents = {
                 'transition'      : 'transitionend',
@@ -35,8 +37,10 @@
 
         // check for each transition type
         for (name in transEndEvents){
+
             // if transition type is supported
             if (body.style[name] !== undefined) {
+
                 // return transition end event name
                 return transEndEvents[name];
             }
@@ -58,26 +62,35 @@
 
         // setup keyboard accessibility
         this.$element.attr('tabindex', 0)
+
             // use keydown, keypress not reliable in IE
             .keydown(function(e){
+
                 // handle key
                 switch (e.which) {
+
                     // left arrow
                     case 37:
+
                         // go to previous item
                         self.prev();
                         break;
+
                     // right arrow
                     case 39:
+
                         // go to next item
                         self.next();
                         break;
+
                     // give control back to browser for other keys
                     default: return;
                 }
+
                 // prevent browser default action
                 e.preventDefault();
             })
+
             // ARIA
             .find('.item').attr('aria-hidden', true);
 
@@ -167,6 +180,7 @@
          * @return Looper
          */
         to: function(pos) {
+
             // zero-base the position
             --pos;
 
@@ -184,6 +198,7 @@
 
             // if looping
             if (this.looping)
+
                 // go to item after done
                 return this.$element.one('shown', function() {
                     that.to(pos);
@@ -191,6 +206,7 @@
 
             // if position is already active
             if (activePos == pos)
+
                 // restart loop
                 return this.pause().loop();
 
@@ -204,31 +220,41 @@
          * @return Looper
          */
         go: function(to) {
+
             // return if busy
             if (this.looping) return this;
 
                 // all items
             var $items = this.$element.find('.item'),
+
                 // active item
                 $active = $items.filter('.active'),
+
                 // active position
                 activePos = $items.index($active),
+
                 // next item to show
                 $next = typeof to == 'string' ? $active[to]() : to,
+
                 // next position
                 nextPos = $items.index($next),
+
                 // is there an auto-loop?
                 isLooping = this.interval,
+
                 // direction of next item
                 direction = typeof to == 'string'
                     ? to
                     : ((activePos == -1 && nextPos == -1) || nextPos > activePos
                         ? 'next'
                         : 'prev'),
+
                 // fallback if next item not found
                 fallback = direction == 'next' ? 'first' : 'last',
+
                 // self-reference
                 that = this,
+
                 // finish
                 complete = function(active, next, direction) {
 
@@ -376,12 +402,16 @@
 
             // if auto-looping
             if ((isLooping || (!isLooping && this.options.interval))
+
                 // and, no argument
                 && (!to
+
                     // or, argument not equal to pause option
                     || (typeof to == 'string' && to !== this.options.pause)
+
                     // or, argument is valid element object and pause option not equal to "to"
                     || (to.length && this.options.pause !== 'to')))
+
                 // start/resume loop
                 this.loop();
 
@@ -393,11 +423,13 @@
 
     // plugin definition
     $.fn.looper = function(option) {
+
         // looper arguments
         var looperArgs = arguments;
 
         // for each matched element
         return this.each(function() {
+
             var $this = $(this),
                 looper = $this.data('looperjs'),
                 options = $.extend({}, $.fn.looper.defaults, typeof option == 'object' && option),
@@ -421,16 +453,22 @@
             }
 
             // if there's an interval, start the auto-loop
-            else if (options.interval) looper.loop();
+            else if (options.interval) looper.loop()
+
+            // otherwise, go to first item in the loop
+            else looper.go();
         });
     };
 
     // default options
     $.fn.looper.defaults = {
+
         // auto-loop interval
         interval: 5000,
+
         // when to pause auto-loop
         pause: 'hover',
+
         // css transition speed (must match css definition)
         speed: 500
     };
@@ -443,12 +481,16 @@
 
         // delegate click event on elements with data-looper attribute
         $('body').on('click.looper', '[data-looper]', function(e) {
+
             var $this = $(this);
-            // ignore the init method
+
+            // ignore the go method
             if ($this.data('looper') == 'go') return;
+
                 // get element target via data (or href) attribute
             var href, $target = $($this.data('target')
                     || (href = $this.attr('href')) && href.replace(/.*(?=#[^\s]+$)/, '')), //strip for ie7
+
                 // setup options
                 options = $.extend({}, $target.data(), $this.data());
 
