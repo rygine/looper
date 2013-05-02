@@ -1,5 +1,5 @@
 /** ===========================================================================
- * Looper.js | a jQuery plugin - v1.1.2
+ * Looper.js | a jQuery plugin - v1.1.5
  * Copyright 2013 Ry Racherbaumer
  * http://rygine.com/projects/looper.js
  *
@@ -48,6 +48,7 @@
 
         // css transitions are not supported
         return false;
+
     })();
 
     // class definition
@@ -101,6 +102,7 @@
 
         // trigger init event
         this.$element.trigger('init');
+
     };
 
     // class prototype definition
@@ -112,6 +114,7 @@
          * @return Looper
          */
         loop: function(e) {
+
             if (!e) this.paused = false;
 
             // check for interval
@@ -128,6 +131,7 @@
 
             // return reference to self for chaining
             return this;
+
         },
 
         /**
@@ -136,7 +140,9 @@
          * @return Looper
          */
         pause: function(e) {
+
             if (!e) this.paused = true;
+
             if (this.$element.find('.next, .prev').length && cssTransitionSupport) {
                 this.$element.trigger(cssTransitionSupport);
                 this.loop();
@@ -148,6 +154,7 @@
 
             // return reference to self for chaining
             return this;
+
         },
 
         /**
@@ -155,11 +162,13 @@
          * @return Looper
          */
         next: function() {
+
             // return if looping
             if (this.looping) return this;
 
             // go to next item
             return this.go('next');
+
         },
 
         /**
@@ -167,11 +176,13 @@
          * @return Looper
          */
         prev: function() {
+
             // return if looping
             if (this.looping) return this;
 
             // go to previous item
             return this.go('prev');
+
         },
 
         /**
@@ -181,6 +192,9 @@
          */
         to: function(pos) {
 
+            // return if looping
+            if (this.looping) return this;
+
             // zero-base the position
             --pos;
 
@@ -189,20 +203,10 @@
                 // active item
                 $active = $items.filter('.active'),
                 // active position
-                activePos = $items.index($active),
-                // self-reference
-                that = this;
+                activePos = $items.index($active);
 
             // return if position is out of range
             if (pos > ($items.length - 1) || pos < 0) return this;
-
-            // if looping
-            if (this.looping)
-
-                // go to item after done
-                return this.$element.one('shown', function() {
-                    that.to(pos);
-                });
 
             // if position is already active
             if (activePos == pos)
@@ -212,6 +216,7 @@
 
             // show item at position
             return this.go($($items[pos]));
+
         },
 
         /**
@@ -221,14 +226,17 @@
          */
         go: function(to) {
 
-            // return if busy
+            // return if looping
             if (this.looping) return this;
 
-                // all items
-            var $items = this.$element.find('.item'),
+            // all items
+            var $items = this.$element.find('.item');
+
+            // if no items, do nothing
+            if (!$items.length) return this;
 
                 // active item
-                $active = $items.filter('.active'),
+            var $active = $items.filter('.active'),
 
                 // active position
                 activePos = $items.index($active),
@@ -432,7 +440,7 @@
 
             var $this = $(this),
                 looper = $this.data('looperjs'),
-                options = $.extend({}, $.fn.looper.defaults, typeof option == 'object' && option),
+                options = $.extend({}, $.fn.looper.defaults, $.isPlainObject(option) ? option : {}),
                 action = typeof option == 'string' ? option : option.looper,
                 args = option.args || (looperArgs.length > 1 && Array.prototype.slice.call(looperArgs, 1));
 
@@ -457,7 +465,9 @@
 
             // otherwise, go to first item in the loop
             else looper.go();
+
         });
+
     };
 
     // default options
@@ -499,6 +509,7 @@
 
             // prevent default event
             e.preventDefault();
+
         });
 
         // auto-init plugin

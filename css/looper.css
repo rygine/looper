@@ -5,6 +5,9 @@
   width: auto;
   height: auto;
 }
+.looper:focus {
+  outline: 0;
+}
 .looper .looper-inner {
   overflow: hidden;
   width: 100%;

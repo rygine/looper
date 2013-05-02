@@ -26,11 +26,17 @@ To Do
 
 * More advanced examples
 * Add SASS support
-* Test with Opera
 * Write unit tests
 
 Release Notes
 --------------------
+
+1.1.5
+* Removed outline on focus in LESS
+* Addressed issue #3
+* Addressed issue #4
+* Added changes from issue #5 pull request
+* Cleaned up code style
 
 1.1.2
 * Fixed issue with loop not starting if no interval is set
