@@ -31,6 +31,9 @@ To Do
 Release Notes
 --------------------
 
+1.1.6
+* Moved css/looper.css to src/looper.css
+
 1.1.5
 * Removed outline on focus in LESS
 * Addressed issue #3
