@@ -1,8 +1,0 @@
-{
-	"name": "Looper.js",
-	"version": "1.1.6",
-	"main": ["./src/looper.js", "./src/looper.min.js", "./less/looper.less", "./src/looper.css"],
-	"dependencies": {
-		"jquery": "~1.8"
-	}
-}
