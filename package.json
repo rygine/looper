@@ -1,0 +1,25 @@
+{
+  "name": "looper.js",
+  "version": "1.0.0",
+  "description": "Looper.js =================",
+  "main": "src/looper.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rygine/looper.git"
+  },
+  "author": "Ry Racherbaumer",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rygine/looper/issues"
+  },
+  "homepage": "https://github.com/rygine/looper#readme",
+  "devDependencies": {
+    "eslint": "4.x"
+  }
+}
