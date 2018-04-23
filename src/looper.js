@@ -6,6 +6,10 @@ const HOVER_EVENT = "hover";
 const CLICK_EVENT = "click";
 const TRANSITION_SLIDE = "slide";
 const TRANSITION_XFADE = "xfade";
+const DIRECTION_LEFT = "left";
+const DIRECTION_RIGHT = "right";
+const DIRECTION_UP = "up";
+const DIRECTION_DOWN = "down";
 
 const transitionEndEvent = getTransitionEndEvent();
 
@@ -21,6 +25,8 @@ export class Looper {
         pauseOn: HOVER_EVENT,
         // transition type
         transition: TRANSITION_SLIDE,
+        direction: DIRECTION_LEFT,
+        autoLoop: false,
       },
       element.dataset || {},
       options
@@ -64,9 +70,11 @@ export class Looper {
     switch (this.options.pauseOn) {
       case HOVER_EVENT:
         this.addEventListener("mouseenter", () => {
-          this.pause();
+          if (!this.paused) {
+            this.pause();
+          }
         });
-        this.addEventListener("mouseenter", () => {
+        this.addEventListener("mouseleave", () => {
           this.loop();
         });
         break;
@@ -82,8 +90,10 @@ export class Looper {
     }
     // trigger init event
     this.element.dispatchEvent(new Event("init"));
-    // start
-    this.loop();
+    // start looping
+    if (this.options.autoLoop) {
+      this.loop();
+    }
   }
 
   clearTimeout() {
@@ -96,11 +106,11 @@ export class Looper {
    * @return Looper
    */
   loop() {
+    this.looping = true;
     this.paused = false;
     this.clearTimeout();
     // setup new loop interval
     this.timeout = setTimeout(this.next.bind(this), this.options.interval);
-    // return reference to self for chaining
     return this;
   }
 
@@ -111,12 +121,16 @@ export class Looper {
   pause() {
     // set paused flag
     this.paused = true;
-    // dispatch transition end event
-    if (transitionEndEvent) {
-      this.element.dispatchEvent(new Event(transitionEndEvent));
-    }
     this.clearTimeout();
-    // return reference to self for chaining
+    return this;
+  }
+
+  /**
+   * Stop auto-looping
+   */
+  stop() {
+    this.pause();
+    this.looping = false;
     return this;
   }
 
@@ -146,6 +160,33 @@ export class Looper {
     return this.go(previousItemIndex);
   }
 
+  _finishTransition(to) {
+    this.transitioning = false;
+    const activeItem = this.items[this.activeItemIndex];
+    const nextItem = this.items[to];
+    // update item classes
+    activeItem.classList.remove("active", "go", this.options.direction);
+    // update ARIA state
+    activeItem.setAttribute("aria-hidden", true);
+    nextItem.classList.remove("go", this.options.direction);
+    nextItem.classList.add("active");
+    // update ARIA state
+    nextItem.removeAttribute("aria-hidden");
+
+    const shownEvent = new CustomEvent("shown", {
+      detail: {
+        // related target is next item to show
+        relatedTarget: nextItem,
+        relatedIndex: to,
+      },
+    });
+
+    // update active item index
+    this.activeItemIndex = to;
+
+    // trigger shown event
+    this.element.dispatchEvent(shownEvent);
+  }
   /**
    * Show item
    * @param {number} to
@@ -155,44 +196,16 @@ export class Looper {
     // ignore out of range index
     // or, if index is already active
     if (to < 0 || to > this.items.length - 1 || to === this.activeItemIndex) {
-      return;
+      return this;
     }
-    // active item
-    var complete = function(active, next, direction) {
-      // if not looping, already complete
-      if (!this.looping) return;
-
-      // set looping status to false
-      this.looping = false;
-
-      // update item classes
-      active
-        .removeClass("active go " + direction)
-        // update ARIA state
-        .attr("aria-hidden", true);
-      next
-        .removeClass("go " + direction)
-        .addClass("active")
-        // update ARIA state
-        .removeAttr("aria-hidden");
-
-      // custom event
-      var e = $.Event("shown", {
-        // related target is new active item
-        relatedTarget: next[0],
-        // related index is the index of the new active item
-        relatedIndex: $items.index(next),
-      });
-
-      // trigger shown event
-      this.$element.trigger(e);
-    };
+    const activeItem = this.items[this.activeItemIndex];
+    const nextItem = this.items[to];
 
     // custom event
     const showEvent = new CustomEvent("show", {
       detail: {
         // related target is next item to show
-        relatedTarget: this.items[to],
+        relatedTarget: nextItem,
         relatedIndex: to,
       },
     });
@@ -212,42 +225,32 @@ export class Looper {
       case TRANSITION_SLIDE:
       case TRANSITION_XFADE:
         // add direction class to active and next item
-        $next.addClass(direction);
-        $active.addClass("go " + direction);
-
+        nextItem.classList.add(this.options.direction);
+        activeItem.classList.add("go", this.options.direction);
         // force re-flow on next item
-        $next[0].offsetWidth;
-
+        nextItem.offsetWidth;
         // add go class to next item
-        $next.addClass("go");
-
+        nextItem.classList.add("go");
         // finish after transition
-        this.$element.one(cssTransitionSupport, function() {
-          // weird CSS transition when element is initially hidden
-          // may cause this event to fire twice with invalid $active
-          // element on first run
-          if (!$active.length) return;
-          complete.call(that, $active, $next, direction);
-        });
+        this.element.addEventListener(
+          cssTransitionSupport,
+          function() {
+            // weird CSS transition when element is initially hidden
+            // may cause this event to fire twice with invalid $active
+            // element on first run
+            this._finishTransition(to);
+          },
+          { once: true }
+        );
         break;
       default:
-        complete.call(that, $active, $next, direction);
+        this._finishTransition(to);
     }
 
-    // if auto-looping
-    if (
-      (isLooping || (!isLooping && this.options.interval)) &&
-      // and, no argument
-      (!to ||
-        // or, argument not equal to pause option
-        (typeof to == "string" && to !== this.options.pause) ||
-        // or, argument is valid element object and pause option not equal to "to"
-        (to.length && this.options.pause !== "to"))
-    )
-      // start/resume loop
+    // if auto-looping, start loop
+    if (this.looping) {
       this.loop();
-
-    // return reference to self for chaining
+    }
     return this;
   }
 }
