@@ -2,8 +2,6 @@ import { getTransitionEndEvent } from "./utils/getTransitionEvent";
 
 const LEFT_ARROW = 37;
 const RIGHT_ARROW = 39;
-const HOVER_EVENT = "hover";
-const CLICK_EVENT = "click";
 const TRANSITION_SLIDE = "slide";
 const TRANSITION_XFADE = "xfade";
 const DIRECTION_LEFT = "left";
@@ -22,7 +20,7 @@ export class Looper {
         // auto-loop interval
         interval: 5000,
         // when to pause auto-loop
-        pauseOn: HOVER_EVENT,
+        pauseOnHover: true,
         // transition type
         transition: TRANSITION_SLIDE,
         direction: DIRECTION_LEFT,
@@ -67,29 +65,26 @@ export class Looper {
       item.setAttribute("aria-hidden", true);
     });
     // setup pause event
-    switch (this.options.pauseOn) {
-      case HOVER_EVENT:
-        this.addEventListener("mouseenter", () => {
-          if (!this.paused) {
-            this.pause();
-          }
-        });
-        this.addEventListener("mouseleave", () => {
+    if (this.options.pauseOnHover) {
+      this.addEventListener("mouseenter", () => {
+        if (this.looping) {
+          this.pause();
+        }
+      });
+      this.addEventListener("mouseleave", () => {
+        if (this.looping) {
           this.loop();
-        });
-        break;
-      case CLICK_EVENT:
-        this.element.addEventListener("click", () => {
-          if (this.looping) {
-            this.pause();
-          } else {
-            this.loop();
-          }
-        });
-        break;
+        }
+      });
     }
     // trigger init event
-    this.element.dispatchEvent(new Event("init"));
+    this.element.dispatchEvent(
+      new CustomEvent("init", {
+        detail: {
+          relatedTarget: this.element,
+        },
+      })
+    );
     // start looping
     if (this.options.autoLoop) {
       this.loop();
@@ -173,19 +168,19 @@ export class Looper {
     // update ARIA state
     nextItem.removeAttribute("aria-hidden");
 
-    const shownEvent = new CustomEvent("shown", {
-      detail: {
-        // related target is next item to show
-        relatedTarget: nextItem,
-        relatedIndex: to,
-      },
-    });
-
     // update active item index
     this.activeItemIndex = to;
 
     // trigger shown event
-    this.element.dispatchEvent(shownEvent);
+    this.element.dispatchEvent(
+      new CustomEvent("shown", {
+        detail: {
+          // related target is next item to show
+          relatedTarget: nextItem,
+          relatedIndex: to,
+        },
+      })
+    );
   }
   /**
    * Show item
@@ -201,17 +196,16 @@ export class Looper {
     const activeItem = this.items[this.activeItemIndex];
     const nextItem = this.items[to];
 
-    // custom event
-    const showEvent = new CustomEvent("show", {
-      detail: {
-        // related target is next item to show
-        relatedTarget: nextItem,
-        relatedIndex: to,
-      },
-    });
-
     // trigger show event
-    this.element.dispatchEvent(showEvent);
+    this.element.dispatchEvent(
+      new CustomEvent("show", {
+        detail: {
+          // related target is next item to show
+          relatedTarget: nextItem,
+          relatedIndex: to,
+        },
+      })
+    );
 
     // return if the event was canceled
     if (showEvent.isDefaultPrevented()) {
